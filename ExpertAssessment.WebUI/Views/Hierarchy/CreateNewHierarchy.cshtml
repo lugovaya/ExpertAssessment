@@ -1,0 +1,72 @@
+﻿@model ExpertAssessment.WebUI.Models.NewHierarchyModel
+           @*"CreateNewHierarchy","Hierarchy",FormMethod.Post *@
+@using (Html.BeginForm("Action", "Hierarchy"))
+{ 
+    
+    <input id="levelIndex" type="hidden" name="levelIndex" />
+    
+    <div class="container">
+        <div class="reg-header">New hierarchy </div>
+        <div class="reg-body">
+            @Html.LabelFor(x => x.HierarchyTitle, "Enter the new hierarchy title")
+            @Html.TextBoxFor(x => x.HierarchyTitle)
+            @Html.ValidationMessageFor(x => x.HierarchyTitle)
+
+            @Html.LabelFor(x => x.HierarchyGoal, "Your goal for this hierarchy is")
+            @Html.TextBoxFor(x => x.HierarchyGoal)
+            @Html.ValidationMessageFor(x => x.HierarchyGoal)
+        </div>
+        <div class="reg-footer">
+             @Html.EditorFor(m => m.LevelCharacteristics)
+                
+            <input type="submit" name="AddNewLevel" value="Добавить уровень" />
+            <input type="submit" name="SaveDatShit" value="Сохранить" />
+          @*  @Ajax.ActionLink("Want to enter next level", "AddNewLevel", new 
+               { 
+                   title = Model.HierarchyTitle,
+                   goal = Model.HierarchyGoal,
+                   levelKey = Model.LevelCharacteristics.Count +1                   
+                   
+               }, new AjaxOptions()
+               {
+                   UpdateTargetId = "added_level",
+                   HttpMethod = "POST",
+                   InsertionMode = InsertionMode.InsertAfter
+               }, new { @class = "btn", id = "add_level" })*@
+            @*<input type="submit" value="Want to enter next level" class="btn btn-primary" data-toggle="button" />*@
+        </div>
+    </div>
+
+}
+<script type="text/javascript">
+    function setLevel(levelId)    {
+        $("#levelIndex").val(levelId);
+    }
+
+    function deleteLevel(levelId) {
+        $("#" + levelId).remove();
+    }
+
+    $('.deleteChar').click(function (e) {
+        e.preventDefault();
+        var x = $(this).prev().attr('id');
+        $("#" + x).remove();
+        $(this).remove();
+    });
+    $(document).ready(function () {
+
+        $('ul li a').each(function () {
+            $(this).prepend('&nbsp;');
+        });
+
+    });
+</script>
+@* TODO something more right*@
+    
+    @if(User.Identity.Name != "")
+    {
+        @Html.Action("LoginIn", "Account",new { area = "" })
+    } else
+    {
+        @Html.Action("Login", "Account",new { area = "" })
+    }

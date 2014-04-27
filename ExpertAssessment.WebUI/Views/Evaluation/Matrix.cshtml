@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ExpertAssessment.Domain.Entities.Evaluation>
+
+@{
+    ViewBag.Title = "Matrix";
+}
+
+<h2>Matrix</h2>
+<!--GetLevelID - list level-->
+@{
+    var levelCount = Model.Select(c => c.CharacteristicID.LevelID).Distinct().Count();
+}    
+
+@foreach (var level in Model)
+{
+    
+
+   
+    <div class="item"> @level.EvaluationID ---> @level.CharacteristicID.CharacteristicID ---> @level.ToCharacteristicID.CharacteristicID ---> @level.CharacteristicID.LevelID ---> @level.Value -->@levelCount </div>    
+}
+
+<table>
+            <thead>
+                <tr>
+                    <td></td>
+                    <!--for GetCharacteristics.Count() - count of characteristcs in this level-->
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <!--if GetLevelByCharacteristicID == level-->
+                <tr>
+                    <td>
+                        <!--for CharacteristicID -->
+                    </td>
+                    <!--for GetCharacteristics-->
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+

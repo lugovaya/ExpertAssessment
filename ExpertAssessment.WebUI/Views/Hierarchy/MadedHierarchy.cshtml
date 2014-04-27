@@ -1,0 +1,20 @@
+﻿@model ExpertAssessment.WebUI.Models.NewHierarchyModel
+<div class="container">
+    <div class="maded-hierarchy">
+        <h1>Иерархия @Model.HierarchyTitle</h1>
+        <h3>Цель @Model.HierarchyGoal</h3>
+        <ul id="nestedlist">
+            @foreach (var chars in Model.LevelCharacteristics)
+            { 
+                <li class="connect">Уровень @(chars.Id+1)</li>
+                <ul>
+                    @foreach (var title in chars.Values)
+                    { 
+                        <li>@title</li>
+                    }
+                </ul>
+            }
+        </ul>
+    </div>
+</div>
+

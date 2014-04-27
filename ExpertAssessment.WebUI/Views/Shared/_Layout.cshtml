@@ -3,10 +3,76 @@
 <head>
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href ="@Url.Content("~/Content/bootstrap.min.css")" rel ="stylesheet" type ="text/css" />
+    @*<link href ="@Url.Content("~/Content/themes/jquery-ui-base.css")" rel="stylesheet" type="text/css" />*@
     <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+
+    @RenderSection("JS", false)
+
 </head>
 
 <body>
+
+    <div class="row">
+        <div class="span3 bs-docs-sidebar">
+            <ul class="nav nav-list bs-docs-sidenav affix" data-offset-top="200" style="margin-left: 1.5%; margin-top: 7.7%;">
+                <li>
+                    <a href="@Url.Action("CreateNewHierarchy", "Hierarchy")">Create new hierarchy
+                        @*<i class="icon-chevron-right"></i>*@
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">Modify hierarchy
+                        @*<i class="icon-chevron-right"></i>*@
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href ="#">Expert Assessment
+                            @*<i class="icon-chevron-right"></i>*@
+                    </a>
+                </li>
+                <li>
+                    <a href ="#">Detale analisys
+                            @*<i class="icon-chevron-right"></i>*@
+                    </a>
+                </li>
+                <li>
+                    <a href ="#">Results
+                            @*<i class="icon-chevron-right"></i>*@
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+   
+
+    <div class="navbar">
+        <div class="navbar-inner" style="-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">
+            <div class="container">
+                <ul class="nav">
+                    <li class="active">@Html.ActionLink("AHP", "Index", "Account")</li>
+                    <li>@Html.ActionLink("What is it?", "Eval", "Evaluation")    </li>
+                    <li>@Html.ActionLink("How is it work?", "Eval", "Evaluation")</li>
+                    <li>@Html.ActionLink("Expert assessment", "Eval", "Evaluation")</li>
+                    <li>@Html.ActionLink("Process mathematic tools ", "Eval", "Evaluation")</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    @*<div class="row">
+        <div class="span9">*@
     @RenderBody()
+    @*</div>
+    </div>*@
+    
+    
 </body>
-</html>

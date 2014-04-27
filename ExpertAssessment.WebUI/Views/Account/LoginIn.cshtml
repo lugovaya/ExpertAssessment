@@ -1,0 +1,11 @@
+﻿@model ExpertAssessment.Domain.Entities.Expert
+<div class="span3 bs-docs-sidebar">
+    Your login is:
+    <b>@User.Identity.Name</b>
+    @*Html.Label("Your full name is")
+        @Html.DisplayFor(x => x.FullName)*@
+    <br />@*<a href ="@Url.Action("Login", "Account")">Logout</a>*@
+    <a type="button" class="btn btn-primary" data-toggle="button" href="@Url.Action("Logout", "Account")">Logout</a>
+    @*<input type="submit" value="Logout" class="btn btn-primary" data-toggle="button" />*@
+</div>
+

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ExpertAssessment.Domain.Entities.Expert>
+
+@{
+    ViewBag.Title = "Auth";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Auth</h2>
+@foreach (var p in Model) {
+<div class="item">
+
+
+<h4>@p.Login </h4>
+    <h5>
+        @p.Email
+    </h5>
+<h5>@p.Pass </h5>
+</div>
+}

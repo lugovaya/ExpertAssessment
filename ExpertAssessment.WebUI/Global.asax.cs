@@ -24,14 +24,31 @@ namespace ExpertAssessment.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+           // routes.MapRoute(
+           //    "",
+           //    "/registration", // URL 
+           //    new { controller = "Account", action = "Registration" }
+           //);
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
+                 new { controller = "Account", action = "Index", id = UrlParameter.Optional }
+                 );
 
         }
 
+        public static void RegisterOtherRoutes(RouteCollection routes) 
+        {
+            //routes.MapRoute(
+            //    "", // Route name
+            //    "{controller}/registration", // URL with parameters
+            //    new { controller = "Account", action = "Registration", id = UrlParameter.Optional });   
+            //routes.MapRoute(
+            //    "Default", // Route name
+            //    "{controller}/{action}/{id}", // URL with parameters
+            //    new { controller = "Account", action = "Registration", id = UrlParameter.Optional });
+        }
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

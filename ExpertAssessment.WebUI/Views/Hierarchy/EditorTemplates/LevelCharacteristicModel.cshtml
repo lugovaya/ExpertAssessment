@@ -1,0 +1,15 @@
+﻿@model ExpertAssessment.WebUI.Models.LevelCharacteristicModel
+
+<div id="level@(Model.Id)">
+@Html.HiddenFor(m=>m.Id)
+<h4>Уровень @Html.DisplayFor(m => m.Id)</h4> 
+@*<button  onclick="deleteLevel(@Model.Id)">Удалить уровень</button>   *@
+
+@for (int i=0;i<Model.Values.Count;i++) {
+        @Html.EditorFor(c => c.Values[i])  
+        @*<button class="deleteChar">Удалить характеристику</button>  *@   
+    }
+
+    <input class="AddNewCharacteristic" type="submit" name="AddNewCharacteristic" value="Добавить характеристику" onclick="setLevel(@Model.Id)" />
+
+</div>

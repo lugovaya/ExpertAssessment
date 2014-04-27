@@ -1,0 +1,9 @@
+﻿@model ExpertAssessment.WebUI.Models.NewHierarchyModel
+@{
+    
+    var count =  Model.LevelCharacteristics.Count;
+      
+}
+@Html.LabelFor(x => x.LevelCharacteristics, "Level" + @count.ToString())
+
+@Html.TextBoxFor(x => x.LevelCharacteristics) <i class ="icon-plus"></i>
