@@ -227,7 +227,7 @@
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Account\LoginIn.cshtml" />
+    <Content Include="Views\Account\LoginInfo.cshtml" />
     <Content Include="Views\Hierarchy\CreateNewHierarchy.cshtml" />
     <Content Include="Views\Hierarchy\AddNewLevel.cshtml" />
     <Content Include="Views\Hierarchy\AddNewCharacteristic.cshtml" />

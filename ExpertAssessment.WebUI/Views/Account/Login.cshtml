@@ -3,8 +3,8 @@
    @using (Html.BeginForm("Login", "Account"))
    {
     
-        <h4 @*class="modal-header"*@>Auth </h4>
-@*<div class="modal-body">*@
+        <h4 >Auth </h4>
+
         @Html.LabelFor(x => x.Login, "Login")
         @Html.TextBoxFor(x => x.Login)
         @Html.ValidationMessageFor(x => x.Login)
@@ -15,6 +15,6 @@
         <p></p>
         <input type="submit" value ="Enter" class="btn btn-primary" data-toggle="button"/>
         <a type="button" class="btn btn-primary" data-toggle="button" href ="@Url.Action("Registration", "Account")">Registration</a>
-@*</div>*@
+
    }
 </div>

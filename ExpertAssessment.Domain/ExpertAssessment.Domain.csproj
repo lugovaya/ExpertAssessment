@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAhpRepository.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Concrete\AHPDbContext.cs" />
     <Compile Include="Concrete\AHPRepository.cs" />
     <Compile Include="Entities\Action.cs" />
