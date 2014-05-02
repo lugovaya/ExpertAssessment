@@ -26,6 +26,8 @@ namespace ExpertAssessment.WebUI.Models
         }
         [DataType(DataType.Text)]
         public int Id { get; set; }
+
+        
         public List<string> Values { get; set; }
     }
 

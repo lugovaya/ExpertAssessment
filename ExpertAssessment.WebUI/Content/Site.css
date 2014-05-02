@@ -136,3 +136,20 @@ span {
 .maded-hierarchy {
     margin: 20px;           
 }
+.reg-body table,
+.reg-footer table {
+    width:100%;
+}
+
+table td label,
+table td span {
+    margin:5px;
+}
+
+table td input {
+    margin:10px;
+}
+
+table td ul {
+    list-style-type:none;
+}

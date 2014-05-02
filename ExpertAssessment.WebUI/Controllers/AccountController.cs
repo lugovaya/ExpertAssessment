@@ -44,7 +44,7 @@ namespace ExpertAssessment.WebUI.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult LoginIn()
+        public ActionResult LoginInfo()
         {
             return PartialView();
         }

@@ -35,6 +35,7 @@ namespace ExpertAssessment.WebUI.Controllers
         //
         // GET: /NewHierarchy/
         private AHPRepository _repository;
+        
         //private List<string> _characteristicList = new List<string>() {"o","la","la" };
         private RepositoryHelper _helper = new RepositoryHelper(); 
 
@@ -46,13 +47,40 @@ namespace ExpertAssessment.WebUI.Controllers
 
         public ActionResult CreateNewHierarchy()
         {
-            
-            return View(new NewHierarchyModel());
+            var model = new NewHierarchyModel();
+
+            return View(model);
         }
 
         [HttpPost]
+        [HttpParamAction]
+        public ActionResult AddNewLevel(NewHierarchyModel model, int levelIndex) 
+        {
+            var level = new LevelCharacteristicModel
+                {
+                    Id = levelIndex,
+                    Values = new List<string> { "" }
+                };
+
+            model.LevelCharacteristics.Add(level);
+
+            return View("CreateNewHierarchy", model);
+        }
+
+        //[HttpParamAction]
+        //public ActionResult AddNewCharacteristic(NewHierarchyModel model, int levelIndex) 
+        //{
+        //    var level = model.LevelCharacteristics.FirstOrDefault(x => x.Id == levelIndex);
+
+        //    if (level != null)
+        //        level.Values.Add("");
+
+        //    return PartialView(level);
+        //}
+
+        [HttpPost]
         [HttpParamAction]    
-        public ActionResult SaveDatShit(NewHierarchyModel model)
+        public ActionResult Save(NewHierarchyModel model)
         {
             var h = _repository.AddHierarchy(model.HierarchyTitle, model.HierarchyGoal,
                _helper.ToCharacteristics(model.LevelCharacteristics));
@@ -68,7 +96,7 @@ namespace ExpertAssessment.WebUI.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        //[HttpPost]
         [HttpParamAction]    
         public ActionResult AddNewLevel(NewHierarchyModel model) // don't know how to take parameter index
         {
@@ -78,7 +106,7 @@ namespace ExpertAssessment.WebUI.Controllers
             //model.HierarchyLevels.Add(index);
             model.LevelCharacteristics.Add(new LevelCharacteristicModel() 
             { 
-                Id = model.LevelCharacteristics.Count, 
+                Id = model.LevelCharacteristics.Count + 2, 
                 Values = new List<string> { "" } 
             });
             return View("CreateNewHierarchy", model);
@@ -86,11 +114,17 @@ namespace ExpertAssessment.WebUI.Controllers
 
         [HttpPost]
         [HttpParamAction]    
-        public ActionResult AddNewCharacteristic(NewHierarchyModel model, int levelIndex = 0) 
+        public ActionResult AddNewCharacteristic(NewHierarchyModel model, int levelIndex = 2) 
         {
-      //      model.LevelCharacteristics[levelIndex].Add(characteristicName);
+            //model.LevelCharacteristics[levelIndex].Add(characteristicName);
             //model.LevelCharacteristics[levelIndex].Values.Add(characteristicName);
-            model.LevelCharacteristics.FirstOrDefault(x => x.Id == levelIndex).Values.Add("");
+            
+            var level = model.LevelCharacteristics.FirstOrDefault(x => x.Id == levelIndex);
+            if (level != null)
+            {
+                level.Values.Add("");                
+            }
+
             return View("CreateNewHierarchy", model);
         }
     }

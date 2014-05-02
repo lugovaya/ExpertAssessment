@@ -1,5 +1,56 @@
 ﻿@model ExpertAssessment.WebUI.Models.NewHierarchyModel
            @*"CreateNewHierarchy","Hierarchy",FormMethod.Post *@
+
+<script type="text/javascript">
+    $(document).on('ready', function () {
+        var chars = [];
+        var levelIndex = 2;
+        chars[0] = 0; chars[1] = 0;
+        $('#AddNewLevel').on('click', function () {
+            chars[levelIndex] = 1;
+            var name = 'Levels['
+                + levelIndex
+                + '].Characteristics['
+                + chars[levelIndex]
+                + ']';
+
+            var div = document.createElement('div');
+            div.className = 'level';
+            div.id = levelIndex;
+            document.getElementById('levels').appendChild(div);
+
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = name;
+            input.id = name;
+            input.value = '';
+            document.getElementById(levelIndex).appendChild(input);
+
+
+            var button = document.createElement('button');
+            button.innerHTML = 'Add characteristic';
+            button.onclick = function () {
+                var id = $(this).closest('div').attr('id');
+                chars[id]++;
+                var name = 'Levels['
+                    + id
+                    + '].Characteristics['
+                    + chars[id]
+                    + ']';
+
+                $('#' + id).append('<input id="' + name + '" name="' + name
+                    + '" type="text" value="" />');
+                return false;
+            }
+            document.getElementById(levelIndex).appendChild(button);
+
+
+            levelIndex++;
+        });
+
+    });
+</script>
+@{ var levelIndex = 2; }
 @using (Html.BeginForm("Action", "Hierarchy"))
 { 
     
@@ -8,31 +59,44 @@
     <div class="container">
         <div class="reg-header">New hierarchy </div>
         <div class="reg-body">
-            @Html.LabelFor(x => x.HierarchyTitle, "Enter the new hierarchy title")
-            @Html.TextBoxFor(x => x.HierarchyTitle)
-            @Html.ValidationMessageFor(x => x.HierarchyTitle)
+            <table class="table-hover">
+                <tbody>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.HierarchyTitle, "Enter the new hierarchy title")</td>
+                        <td>@Html.TextBoxFor(x => x.HierarchyTitle)</td>
+                        <td>@Html.ValidationMessageFor(x => x.HierarchyTitle)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.HierarchyGoal, "Your goal for this hierarchy is")</td>
+                        <td>@Html.TextBoxFor(x => x.HierarchyGoal)</td>
+                        <td>@Html.ValidationMessageFor(x => x.HierarchyGoal)</td>
+                    </tr>
+                </tbody>
+            </table>               
+            
 
-            @Html.LabelFor(x => x.HierarchyGoal, "Your goal for this hierarchy is")
-            @Html.TextBoxFor(x => x.HierarchyGoal)
-            @Html.ValidationMessageFor(x => x.HierarchyGoal)
+            
+            
+            
         </div>
         <div class="reg-footer">
-             @Html.EditorFor(m => m.LevelCharacteristics)
-                
-            <input type="submit" name="AddNewLevel" value="Добавить уровень" />
-            <input type="submit" name="SaveDatShit" value="Сохранить" />
-          @*  @Ajax.ActionLink("Want to enter next level", "AddNewLevel", new 
+            <div id="levels"></div>
+
+            <a id="AddNewLevel">Add Level</a>
+            @*@Html.EditorFor(m => m.LevelCharacteristics, new { levelIndex = 2})
+            <input type="submit" name="AddNewLevel" value="Добавить уровень" />*@
+            <input type="submit" name="Save" value="Сохранить" />
+            @*@Ajax.ActionLink("Want to enter next level", "AddNewLevel", new 
                { 
-                   title = Model.HierarchyTitle,
-                   goal = Model.HierarchyGoal,
-                   levelKey = Model.LevelCharacteristics.Count +1                   
+                   levelIndex = levelIndex                 
                    
                }, new AjaxOptions()
                {
-                   UpdateTargetId = "added_level",
+                   UpdateTargetId = "levels",
                    HttpMethod = "POST",
                    InsertionMode = InsertionMode.InsertAfter
-               }, new { @class = "btn", id = "add_level" })*@
+               }, new { @class = "btn addNewLevel", id = "level" + levelIndex  })*@
+            @*{levelIndex++;}
             @*<input type="submit" value="Want to enter next level" class="btn btn-primary" data-toggle="button" />*@
         </div>
     </div>
@@ -55,6 +119,10 @@
     });
     $(document).ready(function () {
 
+        $('.addNewLevel').click(function () {
+            @{levelIndex++;}
+        })
+
         $('ul li a').each(function () {
             $(this).prepend('&nbsp;');
         });
@@ -63,10 +131,10 @@
 </script>
 @* TODO something more right*@
     
-    @if(User.Identity.Name != "")
+    @*@if(User.Identity.Name != "")
     {
-        @Html.Action("LoginIn", "Account",new { area = "" })
+        @Html.Action("LoginInfo", "Account")
     } else
     {
-        @Html.Action("Login", "Account",new { area = "" })
-    }
+        @Html.Action("Login", "Account")
+    }*@

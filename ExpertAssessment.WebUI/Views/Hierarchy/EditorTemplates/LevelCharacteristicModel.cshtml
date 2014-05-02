@@ -1,15 +1,34 @@
 ﻿@model ExpertAssessment.WebUI.Models.LevelCharacteristicModel
 
-<div id="level@(Model.Id)">
-@Html.HiddenFor(m=>m.Id)
-<h4>Уровень @Html.DisplayFor(m => m.Id)</h4> 
+@{
+    Model.IsActive = true;
+ }
+    <table class="table-condensed" id="level@(Model.Id)">
+        <tr>
+            <td>
+                @Html.HiddenFor(m=>m.Id)
+                @Html.LabelFor(m=>m.Id, "Level " + Model.Id)            
+            </td>
+            <td>
+                <ul id="chars">
+                    @for (int i=0;i<Model.Values.Count;i++) {
+                        <li>@Html.EditorFor(c => c.Values[i])</li>     
+                   }
+                </ul>            
+            </td>
+            <td>
+                @Ajax.ActionLink("Add characteristic", "AddNewCharacteristic", new 
+               { 
+                   levelIndex = Model.Id                 
+                   
+               }, new AjaxOptions()
+               {
+                   UpdateTargetId = "chars",
+                   HttpMethod = "POST",
+                   InsertionMode = InsertionMode.InsertAfter
+               }, new { @class = "btn", id = "level" + Model.Id  })
+              @*<input class="AddNewCharacteristic" type="submit" name="AddNewCharacteristic" value="Добавить характеристику" />*@
+            </td>
+        </tr>
+</table>
 
-
-@for (int i=0;i<Model.Values.Count;i++) {
-        @Html.EditorFor(c => c.Values[i])  
-       
-    }
-
-    <input class="AddNewCharacteristic" type="submit" name="AddNewCharacteristic" value="Добавить характеристику" />
-
-</div>

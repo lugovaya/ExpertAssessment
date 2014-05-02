@@ -1,9 +1,43 @@
-﻿@model ExpertAssessment.WebUI.Models.NewHierarchyModel
-@{
-    
-    var count =  Model.LevelCharacteristics.Count;
-      
+﻿@model ExpertAssessment.WebUI.Models.LevelCharacteristicModel
+@{    
+    var count =  Model.LevelCharacteristics.Count;      
 }
-@Html.LabelFor(x => x.LevelCharacteristics, "Level" + @count.ToString())
 
-@Html.TextBoxFor(x => x.LevelCharacteristics) <i class ="icon-plus"></i>
+<table class="table-condensed" id="level@(Model.Id)">
+        <tr>
+            <td>
+                @Html.HiddenFor(m=>m.Id)
+                @Html.LabelFor(m=>m.Id, "Level " + Model.Id)            
+            </td>
+            <td>
+                <ul id="chars">
+                    @for (int i=0;i<Model.Values.Count;i++) {
+                        <li>@Html.EditorFor(c => c.Values[i])</li>     
+                   }
+                </ul>            
+            </td>
+            <td>
+                @Ajax.ActionLink("Add characteristic", "AddNewCharacteristic", new 
+               { 
+                   levelIndex = Model.Id                 
+                   
+               }, new AjaxOptions()
+               {
+                   UpdateTargetId = "chars",
+                   HttpMethod = "POST",
+                   InsertionMode = InsertionMode.InsertAfter
+               }, new { @class = "btn", id = "level" + Model.Id  })
+              @*<input class="AddNewCharacteristic" type="submit" name="AddNewCharacteristic" value="Добавить характеристику" />*@
+            </td>
+        </tr>
+</table>
+
+@*<tr>
+    <td>
+        @Html.LabelFor(x => x.LevelCharacteristics, "Level" + count.ToString())
+    </td>
+    <td>
+        @Html.TextBoxFor(x => x.LevelCharacteristics) <a class="btn"><i class ="icon-plus"></i></a>
+    </td>
+</tr>
+*@
